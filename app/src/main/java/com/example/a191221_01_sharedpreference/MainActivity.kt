@@ -12,6 +12,9 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setEvents()
+        setValues()
     }
 
     override fun setEvents() {
@@ -27,12 +30,31 @@ class MainActivity : BaseActivity() {
 
                 ContextUtil.setUserId(mContext,userId)
 
+
+
             }
+
+
+        }
+
+//        Q2. 아이디저장 체크박스 체크여부 (Boolean)으로 저장
+//        idCheckBox가 체크 되면
+//        체크 된 값 (체크/해제)을 ContextUtil - SharePreference활용해서 저장
+//        앱이 켜질 때 setValues에서 저장된 체크 여부를 반영(구글링)
+
+        idCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            ContextUtil.setUserIdSave(mContext,isChecked)
+
         }
 
     }
 
     override fun setValues() {
 
+
+       idEdt.setText(ContextUtil.getUserId(mContext))
+
+        idCheckBox.isChecked = ContextUtil.getUserIdSave(mContext)
     }
 }
